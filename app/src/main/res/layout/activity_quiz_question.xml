@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".QuizQuestionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="What is country does this flag?"
+            android:fontFamily="@font/montserrat"
+            android:textSize="25dp"
+            android:textFontWeight="500"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:id="@+id/imgFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ar_flag"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:indeterminate="false"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:max="9"
+                android:min="0"
+                android:progress="0"
+                android:indeterminateTint="@color/grey"
+                android:progressTint="@color/blue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0/0"
+                android:layout_marginLeft="16dp"
+                android:gravity="right"
+                android:fontFamily="@font/montserrat"
+                android:textSize="20dp"
+                android:textFontWeight="700"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
