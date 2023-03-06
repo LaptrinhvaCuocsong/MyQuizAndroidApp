@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 class ListQuestionAdapter(private val context: Context,
                           private val answers: List<String>): BaseAdapter() {
     var indexSelected = -1
+    var indexCorrectAnswer = -1
 
     override fun getCount(): Int {
         return answers.size
@@ -34,9 +35,16 @@ class ListQuestionAdapter(private val context: Context,
         textView.text = answer
         val isSelected = indexSelected == position
         if (isSelected) {
-            textView.setTextColor(ContextCompat.getColor(context, R.color.blue))
+            textView.setTextColor(ContextCompat.getColor(context, R.color.white))
+            textView.background = ContextCompat.getDrawable(context, R.drawable.answer_item_background_selected)
         } else {
-            textView.setTextColor(ContextCompat.getColor(context, R.color.black))
+            if (indexCorrectAnswer == position) {
+                textView.setTextColor(ContextCompat.getColor(context, R.color.white))
+                textView.background = ContextCompat.getDrawable(context, R.drawable.answer_item_background_green)
+            } else {
+                textView.setTextColor(ContextCompat.getColor(context, R.color.blue))
+                textView.background = ContextCompat.getDrawable(context, R.drawable.answer_item_background)
+            }
         }
         return convertView!!
     }

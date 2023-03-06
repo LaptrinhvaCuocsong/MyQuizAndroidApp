@@ -15,6 +15,8 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 class QuizQuestionActivity : AppCompatActivity() {
     private lateinit var tvQuestion: TextView
@@ -27,6 +29,9 @@ class QuizQuestionActivity : AppCompatActivity() {
     private var listAnswersAdapter: ListQuestionAdapter? = null
     private var questions: List<QuestionModel> = arrayListOf()
     private var questionIndex = 0
+    private var answerIndex = -1
+    private var isGoToNextQuestion = false
+    private var yourScore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +59,46 @@ class QuizQuestionActivity : AppCompatActivity() {
         }
         listAnswers.setOnItemClickListener { parent, view, position, id ->
             run {
+                answerIndex = position
                 listAnswersAdapter?.indexSelected = position
                 listAnswersAdapter?.notifyDataSetChanged()
             }
         }
     }
 
-    private fun onClickSubmit() {}
+    private fun onClickSubmit() {
+        if (questionIndex < 0 || questionIndex >= questions.size) { return }
+        if (isGoToNextQuestion) {
+            goToNextQuestion()
+            isGoToNextQuestion = false
+        } else {
+            val question = questions[questionIndex]
+            if (question.answerCorrect == answerIndex) {
+                yourScore ++
+                goToNextQuestion()
+            } else {
+                listAnswersAdapter?.indexCorrectAnswer = question.answerCorrect
+                listAnswersAdapter?.notifyDataSetChanged()
+                if (questionIndex == questions.size - 1) {
+                    btnSubmit.text = resources.getText(R.string.finish)
+                } else {
+                    btnSubmit.text = resources.getText(R.string.goToNextQuestion)
+                }
+                isGoToNextQuestion = true
+            }
+        }
+    }
+
+    private fun goToNextQuestion() {
+        if (questionIndex == questions.size - 1) {
+
+        } else {
+            loadData(questionIndex + 1)
+            answerIndex = -1
+            listAnswersAdapter?.indexCorrectAnswer = -1
+            btnSubmit.text = resources.getText(R.string.submit)
+        }
+    }
 
     private fun loadData(questionIndex: Int) {
         if (questionIndex < 0 || questionIndex >= questions.size) { return }

@@ -2,4 +2,8 @@
     <string name="app_name">MyQuizApp</string>
     <string name="start">START</string>
     <string name="submit">Submit</string>
+    <string name="result">Result</string>
+    <string name="congratulation">Hey, Congratulations</string>
+    <string name="finish">Finish</string>
+    <string name="goToNextQuestion">Go to next question</string>
 </resources>
