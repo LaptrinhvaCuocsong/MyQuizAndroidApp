@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 
 class ListQuestionAdapter(private val context: Context,
-                          private val questions: List<QuestionModel>): BaseAdapter() {
+                          private val answers: List<String>): BaseAdapter() {
+    var indexSelected = -1
+
     override fun getCount(): Int {
-        return questions.size
+        return answers.size
     }
 
     override fun getItem(position: Int): Any {
-        return questions[position]
+        return answers[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -25,8 +28,15 @@ class ListQuestionAdapter(private val context: Context,
         var convertView: View? = convertView
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.answer_item_view, parent, false)
-            val textView = convertView!!.findViewById(R.id.tvAnswer) as TextView
-            textView.text = ""
+        }
+        val textView = convertView!!.findViewById(R.id.tvAnswer) as TextView
+        val answer = answers[position]
+        textView.text = answer
+        val isSelected = indexSelected == position
+        if (isSelected) {
+            textView.setTextColor(ContextCompat.getColor(context, R.color.blue))
+        } else {
+            textView.setTextColor(ContextCompat.getColor(context, R.color.black))
         }
         return convertView!!
     }
