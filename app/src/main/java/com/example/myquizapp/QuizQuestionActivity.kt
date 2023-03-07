@@ -1,6 +1,7 @@
 package com.example.myquizapp
 
 import android.content.Context
+import android.content.Intent
 import android.database.DataSetObserver
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,12 +33,14 @@ class QuizQuestionActivity : AppCompatActivity() {
     private var answerIndex = -1
     private var isGoToNextQuestion = false
     private var yourScore = 0
+    private var username = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
         getUIComponents()
         setupUIs()
+        username = intent.getStringExtra(Constants.USER_NAME) ?: ""
         questions = Constants.getQuestions()
         progressView.min = 0
         progressView.max = questions.size
@@ -91,7 +94,11 @@ class QuizQuestionActivity : AppCompatActivity() {
 
     private fun goToNextQuestion() {
         if (questionIndex == questions.size - 1) {
-
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(Constants.USER_NAME, username)
+            intent.putExtra(Constants.CORRECT_POINT, yourScore)
+            startActivity(intent)
+            finish()
         } else {
             loadData(questionIndex + 1)
             answerIndex = -1

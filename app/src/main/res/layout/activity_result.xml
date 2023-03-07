@@ -44,6 +44,7 @@
             />
 
         <TextView
+            android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Denis"
@@ -53,6 +54,7 @@
             android:layout_marginTop="30dp"/>
 
         <TextView
+            android:id="@+id/tvScorePoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Your Score is 0 out of 9"
@@ -62,6 +64,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
+            android:id="@+id/btnFinish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"

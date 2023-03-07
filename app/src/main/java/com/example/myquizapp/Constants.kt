@@ -1,6 +1,9 @@
 package com.example.myquizapp
 
 object Constants {
+    const val USER_NAME = "user_name"
+    const val CORRECT_POINT = "correct_point"
+
     fun getQuestions(): List<QuestionModel> {
         var questions = ArrayList<QuestionModel>()
         questions.addAll(
