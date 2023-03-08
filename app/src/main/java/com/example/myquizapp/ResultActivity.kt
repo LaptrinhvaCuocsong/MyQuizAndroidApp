@@ -1,5 +1,6 @@
 package com.example.myquizapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -26,5 +27,13 @@ class ResultActivity : AppCompatActivity() {
     private fun setupUIs() {
         val username = intent.getStringExtra(Constants.USER_NAME) ?: "Guest"
         val point = intent.getIntExtra(Constants.CORRECT_POINT, 0)
+        tvUsername.text = username.uppercase()
+        tvYourPoint.text = "Your core is $point"
+
+        btnFinish.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
